@@ -1,0 +1,65 @@
+<h1>Categories#index</h1>
+<p>Find me in app/views/categories/index.html.erb</p>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<h1 class="h3 mb-2 text-gray-800">Categorias de productos</h1>
+
+<div>
+  <%= link_to new_category_path, {remote: true, class: "btn btn-info", id: "anadir-categoria-btn"}  do %>
+    <span class="fas fa-plus-square" ></span>
+  <% end %>
+</div>
+<br />
+
+<div class="card shadow mb-4">
+  <div class="card-body">
+    <div class="table-responsive">
+       <table id="tablaCategorias" class="table table-bordered" width="100%">
+         <thead>
+           <tr>
+             <th>Nombre Categoría</th>
+             <th>Descripcion</th>
+             <th></th>
+           </tr>
+         </thead>
+         <tbody>
+         <% @categorias.each do |cat| %>
+            <tr id="categoria_<%= cat.id %>" >
+                <td><%= cat.nombre %></td>
+                <td><%= cat.descripcion %></td>
+                <td>
+                <%= link_to "editar", edit_category_path(cat), html_options = {class: "btn btn-info btn-xs", remote: true} %>
+                <%= link_to 'Borrar', cat, remote: true, method: :delete, data: { confirm: "¿Borrar categoria: #{cat.nombre}?"}, class: "btn btn-danger btn-xs" %>
+                </td>
+            </tr>
+         <% end %>
+         </tbody>
+       </table>
+    </div>
+  </div>
+</div>
+<%= render 'modal_categorias' %>

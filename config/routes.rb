@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   root to: "pages#home"
   devise_for :user
   resources :categories
-    resources :clients
+  resources :clients
+  resources :suppliers
 end
-··

@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Comercialapp</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>App Administrativa</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag 'sb-admin-2.min' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
 
-   <body id="page-top">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag "sb-admin-2.min" %>
+  </head>
+  <body id="page-top">
     <div id="wrapper">
       <!-- Sidebar -->
       <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -40,7 +45,7 @@
         </li>
 
         <li class="nav-item">
-          <%= link_to root_path, class: "nav-link"  do %>
+          <%= link_to products_path, class: "nav-link"  do %>
             <i class="fas fa-fw fa-shopping-basket"></i>
             <span>Productos</span>
           <%end%>
@@ -61,14 +66,14 @@
         </li>
 
         <li class="nav-item">
-          <%= link_to root_path, class: "nav-link"  do %>
+          <%= link_to sales_path, class: "nav-link"  do %>
             <i class="fas fa-fw fa-shopping-cart"></i>
             <span>Ventas</span>
           <%end%>
         </li>
 
         <li class="nav-item">
-          <%= link_to root_path, class: "nav-link"  do %>
+          <%= link_to warehouse_records_path, class: "nav-link"  do %>
             <i class="fas fa-fw fa-pallet"></i>
             <span>Almacén</span>
           <%end%>
@@ -125,23 +130,25 @@
 
               <!-- Nav Item - User Information -->
               <li class="nav-item dropdown no-arrow">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
-                  <img class="img-profile rounded-circle" src="">
-                </a>
-                <!-- Dropdown - User Information -->
-                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                  <%= link_to root_path, html_options: { class: "dropdown-item"}  do %>
-                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Perfil
-                  <%end%>
-                  <div class="dropdown-divider"></div>
-                  <%= link_to destroy_user_session_path, method: :delete, html_options: { class: "dropdown-item"}  do %>
-                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" ></i>
-                    Logout
-                  <%end%>
-                </div>
-              </li>
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"> <%= current_user.email %> </span>
+                                <img class="img-profile rounded-circle"
+                                    src="https://i.ibb.co/WPFcfw4/usuario.png">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                            <%= link_to "aea", html_options: { class: "dropdown-item"}  do %>
+                              <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                              Perfil
+                            <%end%>
+                            <div class="dropdown-divider"></div>
+                              <%= link_to destroy_user_session_path, method: :delete, html_options: { class: "dropdown-item"}  do %>
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" ></i>
+                                Logout
+                              <%end%>
+                          </div>
+                        </li>
 
             </ul>
 

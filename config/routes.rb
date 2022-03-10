@@ -6,4 +6,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :clients
   resources :suppliers
+  resources :products
+  resources :warehouse_records
+  resources :sales
 end

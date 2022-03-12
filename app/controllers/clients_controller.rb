@@ -45,7 +45,7 @@ class ClientsController < ApplicationController
   end
 
   def buscador
-    @resultados = Client.buscador(params[:termino]).map do |cliente|
+    @resultados = Client.buscador(params[:termino]).map do |cliente| #es una funcion CLASE que esta definifida en client.rb (modelo)
       {
         id: cliente.id,
         nombre_cliente: cliente.nombre

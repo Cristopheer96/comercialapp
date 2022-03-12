@@ -10,5 +10,10 @@ Rails.application.routes.draw do
   resources :warehouse_records
   resources :sales
   get 'buscador_productos/:termino', to: 'products#buscador'
+
+  get 'buscador_clientes/:termino', to: 'clients#buscador'
+
   post 'add_item_venta', to: 'sales#add_item'
+  post 'add_client_venta', to: 'sales#add_cliente'
+
 end

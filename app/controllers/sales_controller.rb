@@ -6,7 +6,6 @@ class SalesController < ApplicationController
   end
 
   def new
-    # @venta = current_user.sales.create(importe: 0.0)
     @venta = current_user.sales.create(importe: 0.0)
     redirect_to edit_sale_path(@venta)
   end

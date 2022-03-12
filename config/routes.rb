@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   resources :products
   resources :warehouse_records
   resources :sales
+  get 'buscador_productos/:termino', to: 'products#buscador'
 end

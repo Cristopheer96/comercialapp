@@ -7,10 +7,7 @@ class SalesController < ApplicationController
 
   def new
     # @venta = current_user.sales.create(importe: 0.0)
-    @venta = Sale.new
-    @venta.importe = 0.0
-    @venta.user_id = current_user.id
-    @venta.save
+    @venta = current_user.sales.create(importe: 0.0)
     redirect_to edit_sale_path(@venta)
   end
 

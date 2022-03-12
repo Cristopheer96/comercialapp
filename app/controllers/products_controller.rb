@@ -62,6 +62,7 @@ class ProductsController < ApplicationController
       end
     respond_to do |format|
       format.json { render :json => @resultados }
+
     end
   end
 

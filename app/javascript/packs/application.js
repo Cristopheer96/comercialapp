@@ -47,7 +47,7 @@ document.addEventListener("turbolinks:load", function() {
           if(data.length > 0)  {
               $("#tabla_buscador tbody").empty();
               for(let x in data){
-                console.log("holafor")
+                console.log("hola Cristoph")
                 let nombre_producto = data[x].nombre_producto;
                 let existencia = data[x].existencia;
                 let id_producto = data[x].id;
@@ -55,7 +55,7 @@ document.addEventListener("turbolinks:load", function() {
                 let newRowContent = `<tr>
                                     <td>${nombre_producto}</td>
                                     <td>${existencia}</td>
-                                    <td><button type="button" class="btn btn-primary" onclick="seleccionarProducto(${id_producto}, ${id_modelo}, '${tipo_modelo}')">
+                                    <td><button type="button" class="btn btn-primary" onclick=" seleccionarProducto(${id_producto}, ${id_modelo}, '${tipo_modelo}')">
                                         Agregar
                                         </button>
                                     </td>
@@ -63,10 +63,76 @@ document.addEventListener("turbolinks:load", function() {
                 $("#tabla_buscador tbody").append(newRowContent);
               }
           }
+          else {
+              $("#tabla_buscador tbody").empty();
+
+            let newRowContent = `<tr>
+                                    <td> No hay conincidenciaas :c pipipi </td>
+                                    <td> </td>
+                                    <td>
+                                    </td>
+                                 </tr>`;
+                $("#tabla_buscador tbody").append(newRowContent);
+
+          }
         });
       }
   });
+ ////////
 
+(function(module, exports) {
+  window.seleccionarProducto = function(id_producto,id_modelo, tipo_modelo) {
+      console.log("dentro de la funcion seleccionarProducto")
+   switch(tipo_modelo){
+     case'sales':
+     agregarItemVent(id_producto,id_modelo)
+     break;
+     case 'warehouse':
+       break;
+  };
+};
+
+d
+}.call(this));
+
+
+
+ function agregarItemVent(id_producto,id_venta){
+   let cantidad_inicial = $('#cantidad_producto').val();
+   let request_url = getRootUrl() + "/add_item_venta";
+   console.log(request_url);
+   let info = { producto_id: id_producto, id: id_venta, cantidad: cantidad_inicial}
+   console.log(info);
+
+   $.ajax({  //peticion por ajax
+     url: request_url,
+     type: 'POST',
+     data: JSON.stringify(info), // convertimosa un formato que pueda ser enviado
+     contentType: 'application/json; charset=utf-8',
+     success: function(result) { // respuesta
+     if( result != null ) {
+         console.log(JSON.stringify(info))
+         $("#buscador_producto").modal('hide');
+         $('body').removeClass('modal-open');
+         $('.modal-backdrop').remove();
+         let cantidad = result.cantidad;
+         let precio = result.precio_producto;
+         let importe_item = result.importe_item;
+         let importe_venta = result.importe_venta;
+         let nombre_prod = result.nombre_prod;
+         let newRowContent = `<tr>
+                                <td>${nombre_prod}</td>
+                                <td>${precio}</td>
+                                <td>${cantidad}</td>
+                                <td>$ ${importe_item}</td>
+                             </tr>`;
+         $("#tabla_ventas tbody").append(newRowContent);
+         $("#importe_venta_lbl").text("Importe: $" + importe_venta);
+       }
+     }
+   });
+ }
+ // fin de tubolinkgs
 });
 
 
@@ -75,3 +141,6 @@ document.addEventListener("turbolinks:load", function() {
 function getRootUrl() {
     return window.location.origin;
 }
+////
+////////////////////////////////////////////////////////////////
+////////////////////////////////

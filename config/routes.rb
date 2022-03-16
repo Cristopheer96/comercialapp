@@ -16,4 +16,10 @@ Rails.application.routes.draw do
   post 'add_item_venta', to: 'sales#add_item'
   post 'add_client_venta', to: 'sales#add_cliente'
 
+  resources :warehouses
+  post 'add_item_almacen', to: 'warehouses#add_item'
+  get 'buscador_proveedores/:termino', to: 'suppliers#buscador'
+
+  post 'add_proveedor_entrada', to: 'warehouses#add_proveedor'
+
 end

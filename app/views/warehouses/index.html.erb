@@ -29,7 +29,8 @@
                 <td> <%= entrada_almacen.try(:supplier).try(:nombre) %> </td>
                 <td>
                   <%= link_to 'Detalles', warehouse_path(entrada_almacen), {class: "btn btn-info btn-xs", remote: true} %>
-                  <%= link_to 'Borrar', { action: 'destroy', id: @entrada_almacen.id } , method: :delete, data: { confirm: 'Eliminar entrada de almacen?' }, class: "btn btn-danger btn-xs" %>
+                  <%= link_to 'Borrar', { action: 'destroy', id: entrada_almacen.id } , method: :delete, data: { confirm: 'Eliminar entrada de almacen?' }, class: "btn btn-danger btn-xs" %>
+                  <%= link_to 'Editar', edit_warehouse_path(entrada_almacen.id), { class: "btn btn-secondary btn-xs" } %>
                 </td>
               </tr>
             <% end %>

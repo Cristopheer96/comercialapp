@@ -21,7 +21,7 @@ class SalesController < ApplicationController
     ActiveRecord::Base.transaction do
       @venta.sale_details.map do |detail|
         prod_vendido = Product.find(detail.product_id)
-        prod_vendido.existencia+= detail.cantidad
+        prod_vendido.existencia += detail.cantidad # prodvendido.existaicna = prdvendido.existecina + detail.cantidad
         ActiveRecord::Rollback unless prod_vendido.save
       end
 

@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   resources :categories
   resources :clients
   resources :suppliers
+  get 'buscador_proveedor/:termino', to: 'suppliers#buscador'
+  post 'add_sup_almacen/', to: 'warehouses#add_proveedor'
+
   resources :products
   resources :warehouse_records
   resources :sales

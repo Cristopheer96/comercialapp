@@ -7,7 +7,7 @@ class WarehousesController < ApplicationController
 
   def new
     @entrada_almacen = current_user.warehouse_records.create
-    redirect_to edit_warehouse_path(@entradas_almacen)
+    redirect_to edit_warehouse_path(@entrada_almacen)
   end
 
   def edit
@@ -18,7 +18,7 @@ class WarehousesController < ApplicationController
 
   end
   def destroy
-    @entradas_almacen.destroy
+    @entrada_almacen.destroy
     respond_to do |format|
       format.html { redirect_to warehouses_url , notice:"la entada ha sido elamanidad"}
       format.json { head :no_content }
@@ -68,6 +68,6 @@ class WarehousesController < ApplicationController
   private
 
   def set_entrada
-    @entradas_almacen = WarehouseRecord.find(params[:id])
+    @entrada_almacen = WarehouseRecord.find(params[:id])
   end
 end

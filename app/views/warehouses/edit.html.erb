@@ -1,11 +1,7 @@
 <%= stylesheet_link_tag 'sales' %>
-
 <div class = "row">
   <div class="col-md-6">
     <h3 class="h3 mb-2 text-gray-800">Detalle de entrada</h3>
-  </div>
-  <div class="col-md-6" style="text-align:right;">
-    <h2 id="importe_venta_lbl" > Importe $<%= @venta.importe %> </h2>
   </div>
   <div class="col-md-5">
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#buscador_producto">
@@ -16,32 +12,34 @@
     </button>
   </div>
   <div class="col-md-7" style="text-align:right;">
-    <%= link_to 'Finalizar Registro', warehouses_path, class: "btn btn-success" %>
-    <%= link_to 'Cancelar Registro', {action: 'destroy', id: @entrada_almacen.id } , method: :delete, data: { confirm: '¿Cancelar la entrada_almacen?' }, class: "btn btn-danger" %>
+    <%= link_to 'Finalizar registro', warehouses_path, class: "btn btn-success" %>
+    <%= link_to 'Cancelar registro', {action: 'destroy', id: @entrada_almacen.id}, method: :delete, data: { confirm: '¿Cancelar la entrada de almacen?' }, class: "btn btn-danger" %>
   </div>
   <div id="proveedor-entrada" class="nombre-proveedor col-md-3" >
-    <%= "Proveedor: #{@entrada_almacen.supplier.present? ? @venta.suppier.nombre : "Proveedor general"}" %>
+    <%= "Proveedor: #{@entrada_almacen.supplier.present? ? @entrada_almacen.supplier.nombre : "Proveedor general"}" %>
   </div>
 </div>
 <br />
 <div class="card shadow mb-4">
 <div class="card-body">
     <div class="table-responsive">
-    <table class="table table-bordered" id="tabla_entrada_almacen" width="80%" cellspacing="0">
+    <table class="table table-bordered" id="tabla_entradas_almacen" width="80%" cellspacing="0">
         <thead>
         <tr>
-            <th>Producto</th>
-            <th>Cantidad</th>
+          <th>ID producto</th>
+          <th>Producto</th>
+          <th>Cantidad</th>
         </tr>
         </thead>
         <tbody>
           <% if @entradas_almacen.empty? %>
           <tr>
-          <td> No hay productos en la venta </td><td></td><td></td>
+          <td> No hay productos registrados </td><td></td><td></td>
           </tr>
           <% else %>
             <% @entradas_almacen.each do |det| %>
               <tr>
+                <td> <%= det.product.try(:id) %> </td>
                 <td> <%= det.product.try(:nombre) %> </td>
                 <td> <%= det.cantidad %> </td>
               </tr>
@@ -52,8 +50,7 @@
     </div>
   </div>
 </div>
-<% @model = @entradas_almacen %>
+<% @model = @entrada_almacen %>
 <% @tipo = 'warehouse' %>
-
 <%= render 'buscador_producto', model: @model, tipo: @tipo %>
-<%= render 'buscador_proveedor' , warehouse: @entrada_almacen %>
+<%= render 'buscador_proveedor', warehouse: @entrada_almacen %>

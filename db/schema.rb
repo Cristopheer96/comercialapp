@@ -94,8 +94,8 @@ ActiveRecord::Schema.define(version: 2022_03_15_231046) do
   create_table "warehouse_records", force: :cascade do |t|
     t.integer "user_id"
     t.integer "cantidad"
-    t.integer "supplier_id", null: false
-    t.integer "product_id", null: false
+    t.integer "supplier_id"
+    t.integer "product_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "index_warehouse_records_on_product_id"

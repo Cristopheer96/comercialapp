@@ -1,0 +1,43 @@
+<%= link_to new_warehouse_path, {class: "btn btn-info", id: "registrar-entrada-btn"}  do %>
+    <span class="fas fa-plus-square"> </span>
+    Realizar Entrada de producto
+<%end%>
+<br />
+<br />
+<div class="card shadow mb-4">
+<div class="card-body">
+    <div class="table-responsive">
+    <table class="table table-bordered" id="tabla_almacen" width="60%" cellspacing="0">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Creador de la entrada</th>
+            <th>Proveedor</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+          <% if @entradas_almacen.empty? %>
+          <tr>
+            <td> No hay entradas </td><td></td><td></td>
+          </tr>
+          <% else %>
+            <% @entradas_almacen.each do |entrada_almacen| %>
+              <tr>
+                <td> <%= entrada_almacen.id %> </td>
+                <td> <%= entrada_almacen.user.email %> </td>
+                <td> <%= entrada_almacen.try(:supplier).try(:nombre) %> </td>
+                <td>
+                  <%= link_to 'Detalles', warehouse_path(entrada_almacen), {class: "btn btn-info btn-xs", remote: true} %>
+                  <%= link_to 'Borrar', { action: 'destroy', id: entrada_almacen.id } , method: :delete, data: { confirm: 'Eliminar entrada de almacen?' }, class: "btn btn-danger btn-xs" %>
+                  <%= link_to 'Editar', edit_warehouse_path(entrada_almacen.id), { class: "btn btn-secondary btn-xs" } %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+<%= render 'modal_warehouse' %>

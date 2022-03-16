@@ -22,10 +22,10 @@ class SalesController < ApplicationController
       @venta.sale_details.map do |detail|
         prod_vendido = Product.find(detail.product_id)
         prod_vendido.existencia += detail.cantidad # prodvendido.existaicna = prdvendido.existecina + detail.cantidad
-        ActiveRecord::Rollback unless prod_vendido.save
+        ActiveRecord::Rollback unless prod_vendido.save # devuelve todo al estado original si ocurre algun problema al iterar fuente: Stackvoer Flow
       end
 
-      ActiveRecord::Rollback unless @venta.destroy
+      ActiveRecord::Rollback unless @venta.destroy # si ocurre un error al eliminar la venta devuelve todo al estado original si ocurre algun problema al iterar fuente: Stackvoer Flow
     end
 
     respond_to do |format|

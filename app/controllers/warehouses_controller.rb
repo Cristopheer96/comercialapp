@@ -18,7 +18,15 @@ class WarehousesController < ApplicationController
 
   end
   def destroy
-    @entrada_almacen.destroy
+    ActiveRecord::Base.transaction do
+      @entrada_almacen.warehouse_details.map do |detail|
+        prod_registrado = Product.find(detail.product_id)
+        prod_registrado.existencia -= detail.cantidad
+        ActiveRecord::Rollback unless prod_registrado.save # devuelve todo al estado original si ocurre algun problema al iterar fuente: Stackvoer Flow
+      end
+
+      ActiveRecord::Rollback unless @entrada_almacen.destroy # si ocurre un error al eliminar la venta devuelve todo al estado original si ocurre algun problema al iterar fuente: Stackvoer Flow
+    end
     respond_to do |format|
       format.html { redirect_to warehouses_url , notice:"la entada ha sido elamanidad"}
       format.json { head :no_content }

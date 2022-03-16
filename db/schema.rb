@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_15_231046) do
+ActiveRecord::Schema.define(version: 2022_03_16_204142) do
 
   create_table "categories", force: :cascade do |t|
     t.string "nombre"
@@ -39,6 +39,20 @@ ActiveRecord::Schema.define(version: 2022_03_15_231046) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["supplier_id"], name: "index_products_on_supplier_id"
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.string "foto"
+    t.string "nombre"
+    t.string "apellido"
+    t.string "direccion"
+    t.string "ciudad"
+    t.string "estado"
+    t.string "zip"
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
   create_table "sale_details", force: :cascade do |t|
@@ -104,6 +118,7 @@ ActiveRecord::Schema.define(version: 2022_03_15_231046) do
 
   add_foreign_key "products", "categories"
   add_foreign_key "products", "suppliers"
+  add_foreign_key "profiles", "users"
   add_foreign_key "sale_details", "products"
   add_foreign_key "sale_details", "sales"
   add_foreign_key "sales", "clients"

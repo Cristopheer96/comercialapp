@@ -25,4 +25,6 @@ Rails.application.routes.draw do
 
   post 'add_proveedor_entrada', to: 'warehouses#add_proveedor'
   resources :profiles, only: [:show, :edit, :update]
+
+  post '/search', to: 'search#results'
 end

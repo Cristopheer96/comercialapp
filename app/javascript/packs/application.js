@@ -12,6 +12,7 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "./sb-admin-2.min"
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
@@ -336,6 +337,7 @@ document.addEventListener("turbolinks:load", function() {
        }
      }
    });
+
   }
  // fin de tubolinkgs
 });

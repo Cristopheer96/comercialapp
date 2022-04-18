@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :clients
   resources :suppliers
-  get 'buscador_proveedor/:termino', to: 'suppliers#buscador'
+  get 'buscador_proveedor/:termino', to: 'suppliers#buscador' #ver controlador
   post 'add_sup_almacen/', to: 'warehouses#add_proveedor'
 
   resources :products
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :sales
   get 'buscador_productos/:termino', to: 'products#buscador'
 
-  get 'buscador_clientes/:termino', to: 'clients#buscador'
+  get 'buscador_clientes/:termino',  to: 'clients#buscador'
 
   post 'add_item_venta', to: 'sales#add_item'
   post 'add_client_venta', to: 'sales#add_cliente'
